@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maryam store Login</title>
+  <style>
+    /* Reset & base styles */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #333;
+    }
+
+    /* Top promo bar */
+    .promo-bar {
+      background-color: #222;
+      color: #eee;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 32px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .promo-bar a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 5px;
+    }
+    .promo-bar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+      font-weight: 500;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .nav-left .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .nav-left a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-left a:hover {
+      color: #f44336;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-right select {
+      padding: 6px 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .nav-search {
+      position: relative;
+    }
+    .nav-search input {
+      padding: 8px 30px 8px 10px;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .nav-search button {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* Main content container */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 40px auto 80px;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    /* Left image container */
+    .image-container {
+      text-align: center;
+    }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+    }
+
+    /* Form container */
+    .form-container {
+      max-width: 380px;
+      font-weight: 500;
+    }
+    .form-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .form-container p {
+      margin-top: 0;
+      margin-bottom: 26px;
+      color: #666;
+      font-size: 1rem;
+    }
+
+    /* Form fields */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 5px;
+      font-size: 1rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    input[type="text"]:focus {
+      border-bottom-color: #f44336;
+    }
+
+    /* Button */
+    button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #d32f2f;
+    }
+
+    /* Forgot password */
+    .forgot-password {
+      margin-top: -10px;
+      font-size: 0.85rem;
+      color: #f44336;
+      cursor: pointer;
+      text-align: right;
+      font-weight: 600;
+      text-decoration: none;
+      user-select: none;
+      display: inline-block;
+      margin-left: auto;
+    }
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111;
+      color: #bbb;
+      font-size: 0.875rem;
+      padding: 40px 30px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+    }
+    .footer-col {
+      flex: 1 1 180px;
+    }
+    .footer-col h4 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .subscribe input[type="email"] {
+      width: 65%;
+      padding: 8px;
+      border-radius: 4px 0 0 4px;
+      border: none;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .subscribe button {
+      width: 35%;
+      padding: 8px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .subscribe button:hover {
+      background-color: #d32f2f;
+    }
+    .footer-col a {
+      color: #bbb;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 400;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .footer-col a:hover {
+      color: #f44336;
+      text-decoration: underline;
+    }
+
+    /* Social icons */
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .social-icons svg {
+      fill: #bbb;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      transition: fill 0.3s ease;
+    }
+    .social-icons svg:hover {
+      fill: #f44336;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        margin: 30px 20px 70px;
+      }
+      .nav-left {
+        gap: 20px;
+      }
+      footer {
+        flex-direction: column;
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Promo Bar -->
+  <div class="promo-bar">
+    Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! &nbsp;
+    <a href="#">Shopstore</a>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-left">
+      <div class="logo">Maryam Store</div>
+      <a href="index.html">Home</a>
+      <a href="cnt.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="login.html">Sign Up</a>
+      <a href="sign.html">Log in</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <input type="text" placeholder="What are you looking for?" />
+        <button aria-label="Search">&#128269;</button>
+      </div>
+      <select aria-label="Language selector">
+        <option>English</option>
+        <option>Spanish</option>
+        <option>French</option>
+      </select>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Left Image -->
+    <div class="image-container">
+      <img src="Frame 767.png" alt="Smartphone with shopping cart and pink bags" />
+    </div>
+
+    <!-- Right Form -->
+    <section class="form-container" aria-label="Log in to Exclusive form">
+      <h2>Create ACCOUNT to Maryam Store</h2>
+      <p>Enter your details below</p>
+      <form>
+        <input 
+          type="text" 
+          name="email-phone" 
+          placeholder="Email or Phone Number" 
+          required 
+          aria-required="true" 
+          autocomplete="username"
+        />
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="Password" 
+          required 
+          aria-required="true" 
+          autocomplete="current-password"
+        />
+        <button type="submit">Log In</button>
+        <button type="submit">Continue with gmil</button>
+        <a href="#" class="forgot-password">login page</a>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-col">
+      <h4>Maryam Store</h4>
+      <div class="subscribe" aria-label="Subscribe for exclusive offers">
+        <p>Get 10% off your first order</p>
+        <form>
+          <input type="email" placeholder="Enter your email" required aria-required="true"/>
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Hilman street, Dhaka, Dh 1105, Bangladesh.</a>
+      <a href="mailto:exclusive@gmail.com">exclusive@gmail.com</a>
+      <a href="tel:+8801988888999">+880 198888 8999</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Account</h4>
+      <a href="#">My Account</a>
+      <a href="#">Login / Register</a>
+      <a href="#">Cart</a>
+      <a href="#">Wishlist</a>
+      <a href="#">Shop</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Link</h4>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms Of Use</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Download App</h4>
+      <p>Save $3 with App New Sign Up</p>
+      <div style="display:flex; gap: 12px; margin-top: 12px;">
+        <a href="#" aria-label="Download Google Play">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play Store" height="40">
+        </a>
+        <a href="#" aria-label="Download Apple Store">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Apple Store" height="40">
+        </a>
+      </div>
+      <div class="social-icons" aria-label="Social media links">
+        <!-- Simple social icons using SVGs -->
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" ><path d="M22 12.1a10 10 0 1 0-11.6 9.9v-7H8v-3h2.4v-2.3c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.18 2.1.18v2.3h-1.1c-1.1 0-1.5.7-1.5 1.4V12h2.6l-.4 3h-2v7a10 10 0 0 0 8-9.9z"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M23 4c-.8.3-1.6.5-2.5.6a4.3 4.3 0 0 0 1.9-2.3 8.6 8.6 0 0 1-2.7 1 4.2 4.2 0 0 0-7.2 3.9A11.8 11.8 0 0 1 2 3.1a4.1 4.1 0 0 0 1.3 5.5 4.1 4.1 0 0 1-1.9-.5v.1a4.2 4.2 0 0 0 3.4 4.1 4.2 4.2 0 0 1-1.9.1 4.2 4.2 0 0 0 3.9 2.9A8.4 8.4 0 0 1 1 18.4a11.7 11.7 0 0 0 6.3 1.8c7.6 0 11.7-6.3 11.7-11.7v-.5A8.5 8.5 0 0 0 23 4z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 21h4v-9H2v9zm7-9h3.6v1.3h.1a4 4 0 0 1 3.6-2c3.8 0 4.4 2.5 4.4 5.7V21h-4v-5c0-1.2 0-2.8-1.7-2.8s-1.9 1.3-1.9 2.7V21H9v-9z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
